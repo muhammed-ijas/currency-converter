@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { InputBox } from './components'
 import useCurrencyInfo from './hooks/userCurrencyInfo'
-import BackgroundImage from './assets/background-image.jpg'
+import BackgroundImage from './assets/bgi-3.jpg'
 
-import './App.css'
 
 function App() {
 
@@ -48,13 +47,15 @@ function App() {
                             amount={amount}
                             currencyOptions={options}
                             onCurrencyChange={(currency)=> setAmount(amount)}
+                            selectCurrency={from}
+                            onAmountChange={(amount)=> setAmount(amount)}
                         />
                     </div>
                     <div className="relative w-full h-0.5">
                         <button
                             type="button"
                             className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
-                            
+                            onClick={swap}
                         >
                             swap
                         </button>
@@ -62,11 +63,15 @@ function App() {
                     <div className="w-full mt-1 mb-4">
                         <InputBox
                             label="To"
-                            
+                            amount={convertedAmount}
+                            currencyOptions={options}
+                            onCurrencyChange={(currency)=> setTo(currency)}
+                            selectCurrency={to}
+                            amountDisable
                         />
                     </div>
                     <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
-                        Convert 
+                        Convert {from.toUpperCase()} to {to.toUpperCase()}
                     </button>
                 </form>
             </div>
